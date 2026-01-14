@@ -28,5 +28,14 @@ class ScoreboardTest {
         assertEquals(1, summary.size());
     }
 
+    @Test
+    void shouldFinishGame() {
+        Long gameId = scoreboard.startGame(homeTeam, awayTeam);
+
+        scoreboard.finishGame(gameId);
+
+        List<Game> summary = scoreboard.getSummary();
+        assertTrue(summary.isEmpty());
+    }
 
 }
