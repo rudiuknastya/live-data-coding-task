@@ -21,4 +21,12 @@ public class Game {
     public void setAwayScore(int awayScore) {
         this.awayScore = awayScore;
     }
+
+    public int getHomeScore() {
+        return homeScore;
+    }
+
+    public int getAwayScore() {
+        return awayScore;
+    }
 }

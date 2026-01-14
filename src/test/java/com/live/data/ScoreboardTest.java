@@ -38,4 +38,20 @@ class ScoreboardTest {
         assertTrue(summary.isEmpty());
     }
 
+    @Test
+    void shouldUpdateScore() {
+        Long gameId = scoreboard.startGame(homeTeam, awayTeam);
+
+        scoreboard.updateScore(gameId, 1,2 );
+        Game game = scoreboard.getSummary().get(0);
+
+        assertEquals(1, game.getHomeScore());
+        assertEquals(2, game.getAwayScore());
+    }
+
+    @Test
+    void shouldThrowGameNotFoundExceptionForUpdateScore() {
+        assertThrows(GameNotFoundException.class, () -> scoreboard.updateScore(5L, 2, 2));
+    }
+
 }
