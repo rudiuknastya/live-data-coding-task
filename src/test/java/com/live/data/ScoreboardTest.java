@@ -19,9 +19,10 @@ class ScoreboardTest {
     }
 
     @Test
-    void shouldStartGame(){
+    void shouldStartGame() {
         Long gameId = scoreboard.startGame(homeTeam, awayTeam);
         assertNotNull(gameId);
+        assertEquals(1L, gameId);
 
         List<Game> summary = scoreboard.getSummary();
         assertEquals(1, summary.size());
