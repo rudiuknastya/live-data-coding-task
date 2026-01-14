@@ -18,6 +18,7 @@ public class Scoreboard {
     }
 
     public void finishGame(Long gameId) {
+        games.remove(gameId);
     }
 
     public void updateScore(Long gameId, int homeScore, int awayScore) {
