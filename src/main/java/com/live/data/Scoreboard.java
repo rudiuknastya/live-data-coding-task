@@ -22,6 +22,13 @@ public class Scoreboard {
     }
 
     public void updateScore(Long gameId, int homeScore, int awayScore) {
+        if (games.containsKey(gameId)) {
+            Game game = games.get(gameId);
+            game.setHomeScore(homeScore);
+            game.setAwayScore(awayScore);
+        } else {
+            throw new GameNotFoundException(gameId);
+        }
     }
 
     public List<Game> getSummary() {
