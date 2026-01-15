@@ -1,6 +1,7 @@
 package com.live.data;
 
-import java.util.ArrayList;
+
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,10 @@ public class Scoreboard {
     }
 
     public List<Game> getSummary() {
-        return new ArrayList<>(games.values());
+        return games.values().stream()
+                    .sorted(Comparator
+                                    .comparing(Game::getTotalScore, Comparator.reverseOrder())
+                                    .thenComparing(Game::getCreatedAt, Comparator.reverseOrder()))
+                    .toList();
     }
 }

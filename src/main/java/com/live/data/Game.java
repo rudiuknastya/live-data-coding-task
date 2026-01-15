@@ -1,17 +1,21 @@
 package com.live.data;
 
+import java.time.Instant;
+
 public class Game {
 
-    private Team homeTeam;
-    private Team awayTeam;
+    private final Team homeTeam;
+    private final Team awayTeam;
     private int homeScore;
     private int awayScore;
+    private final Instant createdAt;
 
     public Game(Team homeTeam, Team awayTeam, int homeScore, int awayScore) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = homeScore;
         this.awayScore = awayScore;
+        this.createdAt = Instant.now();
     }
 
     public void setHomeScore(int homeScore) {
@@ -36,6 +40,10 @@ public class Game {
 
     public Team getAwayTeam() {
         return awayTeam;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 
     public int getTotalScore() {
