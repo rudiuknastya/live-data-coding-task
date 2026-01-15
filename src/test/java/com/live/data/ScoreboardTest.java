@@ -14,8 +14,8 @@ class ScoreboardTest {
     @BeforeEach
     void setUp() {
         scoreboard = new Scoreboard();
-        homeTeam = new Team("homeTeam");
-        awayTeam = new Team("awayTeam");
+        homeTeam = new Team("Spain");
+        awayTeam = new Team("Brazil");
     }
 
     @Test
@@ -54,4 +54,37 @@ class ScoreboardTest {
         assertThrows(GameNotFoundException.class, () -> scoreboard.updateScore(5L, 2, 2));
     }
 
+    @Test
+    void shouldGetSummaryByTotalScore() {
+        Long gameId1 = scoreboard.startGame(homeTeam, awayTeam);
+        Long gameId2 = scoreboard.startGame(new Team("Mexico"), new Team("Canada"));
+
+        scoreboard.updateScore(gameId1, 1, 5);
+        scoreboard.updateScore(gameId2, 7, 2);
+
+        List<Game> summary = scoreboard.getSummary();
+
+        assertEquals(2, summary.size());
+        assertEquals(9, summary.get(0).getTotalScore());
+        assertEquals(6, summary.get(1).getTotalScore());
+    }
+
+    @Test
+    void shouldGetSummaryByTotalScoreAndRecentlyAdded() {
+        Long gameId1 = scoreboard.startGame(homeTeam, awayTeam);
+        Long gameId2 = scoreboard.startGame(new Team("Mexico"), new Team("Canada"));
+
+        scoreboard.updateScore(gameId1, 1, 5);
+        scoreboard.updateScore(gameId2, 3, 3);
+
+        List<Game> summary = scoreboard.getSummary();
+        Game game1 = summary.get(0);
+        Game game2 = summary.get(1);
+
+        assertEquals(2, summary.size());
+        assertEquals(6, game1.getTotalScore());
+        assertEquals(6, game2.getTotalScore());
+        assertEquals("Mexico", game1.getHomeTeam().getName());
+        assertEquals("Canada", game1.getAwayTeam().getName());
+    }
 }

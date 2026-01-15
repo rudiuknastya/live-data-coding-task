@@ -29,4 +29,16 @@ public class Game {
     public int getAwayScore() {
         return awayScore;
     }
+
+    public Team getHomeTeam() {
+        return homeTeam;
+    }
+
+    public Team getAwayTeam() {
+        return awayTeam;
+    }
+
+    public int getTotalScore() {
+        return homeScore + awayScore;
+    }
 }
